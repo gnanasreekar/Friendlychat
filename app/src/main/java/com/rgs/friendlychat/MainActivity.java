@@ -1,6 +1,16 @@
 package com.rgs.friendlychat;
 
+/*
+  Developed by : R.Gnana Sreekar
+  Github : https://github.com/gnanasreekar
+  Linkdin : https://www.linkedin.com/in/gnana-sreekar/
+  Instagram : https://www.instagram.com/gnana_sreekar/
+  Website : https://gnanasreekar.com
+*/
+
+
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -8,7 +18,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -69,42 +82,44 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     if (item.getItemId() == R.id.hello)
-                        Toast.makeText(context, "Search Clicked", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(MainActivity.this,Feedback.class));
+                    else if (item.getItemId() == R.id.code)
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/gnanasreekar/Friendlychat")));
+                    else if (item.getItemId() == R.id.help)
+                        helpdialog();
                     return true;
                 }
-
             });
             bottomSheetBehavior = BottomSheetBehavior.from(bottomDrawer);
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-            bottomAppBar.setNavigationIcon(R.drawable.ic_baseline_menu_24);
-            bottomAppBar.replaceMenu(R.menu.menu_demo);
-            bottomAppBar.setFabAlignmentMode(BottomAppBar.FAB_ALIGNMENT_MODE_END);
+          //  bottomAppBar.setNavigationIcon(R.drawable.ic_baseline_menu_24);
+         //   bottomAppBar.replaceMenu(R.menu.menu_demo);
             bottomAppBar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HALF_EXPANDED);
                 }
             });
-//            bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-//                @Override
-//                public boolean onMenuItemClick(MenuItem item) {
-//                    switch (item.getItemId()) {
-//                        case R.id.hello:
-//                            Toast.makeText(context, "Search Clicked2", Toast.LENGTH_SHORT).show();
-//                            break;
-//
-//                    }
-//                    return false;
-//                }
-//            });
+            bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.hello:
+                            startActivity(new Intent(MainActivity.this,Feedback.class));
+                            break;
+                    }
+                    return false;
+                }
+            });
             fab = findViewById(R.id.fab);
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "Fab Clicked!", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(MainActivity.this,About.class));
                 }
             });
         }
+
 
         users = new ArrayList<>();
         chatids = new ArrayList<>();
@@ -180,5 +195,17 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+
+
+    public void helpdialog(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
+        builder.setTitle("Help");
+        builder.setMessage("Every User yo see in the main screen is a account in firebase with a UID, Usinf this uid i was able to make a one to one chat room app \n There is an Offencive word filter \n an Admin mode \n " +
+                "Anti Flood Protection and even more features coming soon");
+        builder.setPositiveButton("OK", null);
+        builder.setNegativeButton("Cancel", null);
+
+        builder.show();
     }
 }

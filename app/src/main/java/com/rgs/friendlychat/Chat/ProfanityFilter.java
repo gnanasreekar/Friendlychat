@@ -1,5 +1,5 @@
 package com.rgs.friendlychat.Chat;
-
+//Developed by https://github.com/AndreiD
 //i got it from here: https://github.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words
 public class ProfanityFilter {
   public static String[] ENGLISH = new String[] {

@@ -1,5 +1,13 @@
 package com.rgs.friendlychat.Chat;
 
+/*
+  Developed by : R.Gnana Sreekar
+  Github : https://github.com/gnanasreekar
+  Linkdin : https://www.linkedin.com/in/gnana-sreekar/
+  Instagram : https://www.instagram.com/gnana_sreekar/
+  Website : https://gnanasreekar.com
+*/
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;

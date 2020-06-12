@@ -1,5 +1,7 @@
 package com.rgs.friendlychat.Chat;
 
+//Developed by https://github.com/AndreiD
+
 import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties

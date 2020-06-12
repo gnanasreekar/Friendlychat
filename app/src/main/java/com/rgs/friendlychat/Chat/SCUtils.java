@@ -24,7 +24,7 @@ import java.util.Date;
 import java.util.TimeZone;
 
 public class SCUtils {
-
+  //Developed by https://github.com/AndreiD
   //returns a unique id for each device
   public static String getUniqueID(Context ctx) {
     return Settings.Secure.getString(ctx.getContentResolver(), Settings.Secure.ANDROID_ID);
