@@ -2,13 +2,25 @@ package com.rgs.friendlychat;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.Toast;
+import android.widget.ToggleButton;
 
+import com.google.android.material.bottomappbar.BottomAppBar;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,11 +42,69 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView rv;
     private ChatUserAdapter adapter;
 
+    BottomAppBar bottomAppBar;
+    BottomSheetBehavior<View> bottomSheetBehavior;
+    CoordinatorLayout coordinatorLayout;
+    FloatingActionButton fab;
+    NavigationView navigationView;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("FriendlyChat");
+        }
+
+        {
+            context = MainActivity.this;
+            navigationView = findViewById(R.id.navigation_view);
+            coordinatorLayout = findViewById(R.id.coordinator_layout);
+            View bottomDrawer = coordinatorLayout.findViewById(R.id.bottom_drawer);
+            bottomAppBar = findViewById(R.id.bottom_app_bar);
+
+            navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    if (item.getItemId() == R.id.hello)
+                        Toast.makeText(context, "Search Clicked", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+            });
+            bottomSheetBehavior = BottomSheetBehavior.from(bottomDrawer);
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+            bottomAppBar.setNavigationIcon(R.drawable.ic_baseline_menu_24);
+            bottomAppBar.replaceMenu(R.menu.menu_demo);
+            bottomAppBar.setFabAlignmentMode(BottomAppBar.FAB_ALIGNMENT_MODE_END);
+            bottomAppBar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HALF_EXPANDED);
+                }
+            });
+//            bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+//                @Override
+//                public boolean onMenuItemClick(MenuItem item) {
+//                    switch (item.getItemId()) {
+//                        case R.id.hello:
+//                            Toast.makeText(context, "Search Clicked2", Toast.LENGTH_SHORT).show();
+//                            break;
+//
+//                    }
+//                    return false;
+//                }
+//            });
+            fab = findViewById(R.id.fab);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, "Fab Clicked!", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
 
         users = new ArrayList<>();
         chatids = new ArrayList<>();

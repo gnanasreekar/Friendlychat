@@ -1,16 +1,45 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+ <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/coordinator_layout"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@color/grey_300"
+tools:context=".MainActivity">
+
+     <androidx.recyclerview.widget.RecyclerView
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:id="@+id/chat_home_rec" />
+
+<com.google.android.material.bottomappbar.BottomAppBar
+    android:id="@+id/bottom_app_bar"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/colorPrimary"
-    tools:context=".MainActivity">
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:layout_gravity="bottom"
+    app:navigationIcon="@drawable/ic_baseline_menu_24" />
 
-    <androidx.recyclerview.widget.RecyclerView
+<com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:id="@+id/fab"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_anchor="@id/bottom_app_bar"
+    app:srcCompat="@drawable/ic_baseline_info_24" />
+
+<FrameLayout
+    android:id="@+id/bottom_drawer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="16dp"
+    android:visibility="gone"
+    app:behavior_hideable="true"
+    app:layout_behavior="@string/bottom_sheet_behavior">
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/chat_home_rec" />
-
-</LinearLayout>
+        android:layout_height="wrap_content"
+        app:menu="@menu/menu_demo" />
+</FrameLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
