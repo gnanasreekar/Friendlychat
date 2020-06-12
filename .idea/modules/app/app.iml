@@ -181,5 +181,6 @@
     <orderEntry type="library" name="Gradle: com.google.android.datatransport:transport-api:2.2.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: ss.anoop:awesome-textinput-layout:1.0.3@aar" level="project" />
     <orderEntry type="library" name="Gradle: de.hdodenhof:circleimageview:3.1.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.GrenderG:Toasty:1.4.2@aar" level="project" />
   </component>
 </module>

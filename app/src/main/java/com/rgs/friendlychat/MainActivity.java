@@ -45,6 +45,8 @@ import com.rgs.friendlychat.Chat.ChatUserPOJO;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
+
 public class MainActivity extends AppCompatActivity {
 
     DatabaseReference databaseReference;
@@ -70,6 +72,10 @@ public class MainActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("FriendlyChat");
         }
+
+        Toasty.success(this, "Please Report Bugs if any... \nHope it helps 😊", Toast.LENGTH_LONG,true).show();
+
+
 
         {
             context = MainActivity.this;
@@ -201,8 +207,8 @@ public class MainActivity extends AppCompatActivity {
     public void helpdialog(){
         final AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
         builder.setTitle("Help");
-        builder.setMessage("Every User yo see in the main screen is a account in firebase with a UID, Usinf this uid i was able to make a one to one chat room app \n There is an Offencive word filter \n an Admin mode \n " +
-                "Anti Flood Protection and even more features coming soon");
+        builder.setMessage("Every User yo see in the main screen is a account in firebase with a UID, Usinf this uid i was able to make a one to one chat room app \n*There is an Offencive word filter \n*an Admin mode \n " +
+                "*Anti Flood Protection and even more features coming soon");
         builder.setPositiveButton("OK", null);
         builder.setNegativeButton("Cancel", null);
 
