@@ -21,9 +21,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -63,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton fab;
     NavigationView navigationView;
     Context context;
+    SharedPreferences sharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toasty.success(this, "Please Report Bugs if any... \nHope it helps 😊", Toast.LENGTH_LONG,true).show();
 
-
+sharedPreferences = getApplicationContext().getSharedPreferences("sp", 0);
 
         {
             context = MainActivity.this;
@@ -83,6 +88,10 @@ public class MainActivity extends AppCompatActivity {
             coordinatorLayout = findViewById(R.id.coordinator_layout);
             View bottomDrawer = coordinatorLayout.findViewById(R.id.bottom_drawer);
             bottomAppBar = findViewById(R.id.bottom_app_bar);
+
+
+            Menu nav_Menu = navigationView.getMenu();
+            nav_Menu.findItem(R.id.name).setTitle("Name: " + sharedPreferences.getString("name", "..."));
 
             navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
                 @Override
@@ -203,6 +212,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public int getSkeletonRowCount(Context context) {
+        int pxHeight = getDeviceHeight(context);
+        int skeletonRowHeight = (int) getResources()
+                .getDimension(R.dimen.row_layout_height); //converts to pixel
+        return (int) Math.ceil(pxHeight / skeletonRowHeight);
+    }
+    public int getDeviceHeight(Context context){
+        Resources resources = context.getResources();
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+        return metrics.heightPixels;
+    }
 
     public void helpdialog(){
         final AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogStyle);

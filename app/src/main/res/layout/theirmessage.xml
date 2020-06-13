@@ -35,8 +35,15 @@
              android:autoLink="all"
              android:textIsSelectable="true"
              android:textColorHighlight="@color/blue_300"
-
              android:id="@+id/their_message"  />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:textSize="12sp"
+                android:id="@+id/theirtime"
+                />
 
         </LinearLayout>
 

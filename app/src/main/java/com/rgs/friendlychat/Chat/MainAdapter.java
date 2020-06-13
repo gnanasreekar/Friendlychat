@@ -66,15 +66,19 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
         Message p = data.get(i);
+        String formatted_date = SCUtils.formatted_date(p.getTimestamp());
         if (myViewHolder instanceof MYmessage) {
             MYmessage view = (MYmessage) myViewHolder;
 
             view.my_mess_tv.setText(p.getMessage());
+            view.mytime.setText(formatted_date);
            // view.my_mess_tv.setAnimation(AnimationUtils.loadAnimation(mContext,R.anim.fade_trans));
 
         } else {
             Theirmessage view = (Theirmessage) myViewHolder;
             view.their_mess.setText(p.getMessage());
+            view.their_time.setText(formatted_date);
+
 //            if (p.getPic().equals("...")){
                 Glide.with(mContext).load(R.drawable.ic_male).into(view.pic);
 //            } else {
@@ -101,26 +105,28 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     class MYmessage extends RecyclerView.ViewHolder {
 
-        private TextView my_mess_tv;
+        private TextView my_mess_tv,mytime;
         private LinearLayout my_lyt;
 
         MYmessage(@NonNull View itemView) {
             super(itemView);
             my_mess_tv = itemView.findViewById(R.id.my_message);
             my_lyt = itemView.findViewById(R.id.my_messagelayout);
+            mytime = itemView.findViewById(R.id.mytime);
         }
 
     }
 
     class Theirmessage extends RecyclerView.ViewHolder {
 
-        private TextView their_mess;
+        private TextView their_mess,their_time;
         ImageView pic;
         LinearLayout lyt_their;
 
         Theirmessage(@NonNull View itemView) {
             super(itemView);
             their_mess = itemView.findViewById(R.id.their_message);
+            their_time = itemView.findViewById(R.id.theirtime);
             lyt_their = itemView.findViewById(R.id.theirmessage_layout);
             pic = itemView.findViewById(R.id.their_image);
         }
