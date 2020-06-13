@@ -31,7 +31,7 @@ public class About extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("About");
+        getSupportActionBar().setTitle("Developed by");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         image =  findViewById(R.id.image);

@@ -17,4 +17,5 @@
     <dimen name="spacing_xsmall">2dp</dimen>
     <dimen name="spacing_smlarge">18dp</dimen>
     <dimen name="letter_tile_size">32dp</dimen>
+    <dimen name="row_layout_height">100dp</dimen>
 </resources>

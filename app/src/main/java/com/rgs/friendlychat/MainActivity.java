@@ -30,9 +30,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -68,6 +70,10 @@ public class MainActivity extends AppCompatActivity {
     Context context;
     SharedPreferences sharedPreferences;
 
+    LinearLayout loadingLayout;
+    LottieAnimationView loadingAnimation;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("FriendlyChat");
+            getSupportActionBar().setTitle("FriendlyChat (^///^)");
         }
 
         Toasty.success(this, "Please Report Bugs if any... \nHope it helps 😊", Toast.LENGTH_LONG,true).show();
@@ -91,7 +97,7 @@ sharedPreferences = getApplicationContext().getSharedPreferences("sp", 0);
 
 
             Menu nav_Menu = navigationView.getMenu();
-            nav_Menu.findItem(R.id.name).setTitle("Name: " + sharedPreferences.getString("name", "..."));
+            nav_Menu.findItem(R.id.name).setTitle("Your name: " + sharedPreferences.getString("name", "..."));
 
             navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
                 @Override
@@ -135,6 +141,8 @@ sharedPreferences = getApplicationContext().getSharedPreferences("sp", 0);
             });
         }
 
+        loadingLayout = findViewById(R.id.loading_layout);
+        loadingAnimation = findViewById(R.id.loading_animation);
 
         users = new ArrayList<>();
         chatids = new ArrayList<>();
@@ -172,6 +180,8 @@ sharedPreferences = getApplicationContext().getSharedPreferences("sp", 0);
                     }
 
                 }
+                loadingLayout.setVisibility(View.GONE);
+                loadingAnimation.cancelAnimation();
                 adapter.setlist(listData);
                 rv.setAdapter(adapter);
 
@@ -208,8 +218,6 @@ sharedPreferences = getApplicationContext().getSharedPreferences("sp", 0);
             }
         });
 
-
-
     }
 
     public int getSkeletonRowCount(Context context) {
@@ -218,6 +226,7 @@ sharedPreferences = getApplicationContext().getSharedPreferences("sp", 0);
                 .getDimension(R.dimen.row_layout_height); //converts to pixel
         return (int) Math.ceil(pxHeight / skeletonRowHeight);
     }
+
     public int getDeviceHeight(Context context){
         Resources resources = context.getResources();
         DisplayMetrics metrics = resources.getDisplayMetrics();
