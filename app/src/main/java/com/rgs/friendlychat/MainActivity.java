@@ -24,6 +24,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
@@ -81,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("FriendlyChat (^///^)");
+            getSupportActionBar().setTitle("FriendlyChat    ╰(*°▽°*)╯");
         }
 
         Toasty.success(this, "Please Report Bugs if any... \nHope it helps 😊", Toast.LENGTH_LONG,true).show();
@@ -98,6 +99,7 @@ sharedPreferences = getApplicationContext().getSharedPreferences("sp", 0);
 
             Menu nav_Menu = navigationView.getMenu();
             nav_Menu.findItem(R.id.name).setTitle("Your name: " + sharedPreferences.getString("name", "..."));
+            nav_Menu.findItem(R.id.uid).setTitle("Your UID: " + sharedPreferences.getString("uid", "..."));
 
             navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
                 @Override
@@ -220,26 +222,30 @@ sharedPreferences = getApplicationContext().getSharedPreferences("sp", 0);
 
     }
 
-    public int getSkeletonRowCount(Context context) {
-        int pxHeight = getDeviceHeight(context);
-        int skeletonRowHeight = (int) getResources()
-                .getDimension(R.dimen.row_layout_height); //converts to pixel
-        return (int) Math.ceil(pxHeight / skeletonRowHeight);
-    }
-
-    public int getDeviceHeight(Context context){
-        Resources resources = context.getResources();
-        DisplayMetrics metrics = resources.getDisplayMetrics();
-        return metrics.heightPixels;
+    @Override
+    public void onBackPressed() {
+        if (bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_HIDDEN){
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+            return;
+        }
+        super.onBackPressed();
     }
 
     public void helpdialog(){
         final AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
         builder.setTitle("Help");
+
         builder.setMessage("Every User yo see in the main screen is a account in firebase with a UID, Usinf this uid i was able to make a one to one chat room app \n*There is an Offencive word filter \n*an Admin mode \n " +
                 "*Anti Flood Protection and even more features coming soon");
         builder.setPositiveButton("OK", null);
         builder.setNegativeButton("Cancel", null);
+        builder.setNeutralButton("Feedback", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(MainActivity.this,Feedback.class));
+
+            }
+        });
 
         builder.show();
     }

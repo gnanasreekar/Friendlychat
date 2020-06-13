@@ -41,9 +41,9 @@ tools:context=".MainActivity">
 <com.google.android.material.bottomappbar.BottomAppBar
     android:id="@+id/bottom_app_bar"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="10dp"
+    android:layout_height="?android:attr/actionBarSize"
     android:layout_gravity="bottom"
+    android:paddingTop="14dp"
     app:fabAlignmentMode="end"
     app:navigationIcon="@drawable/ic_baseline_menu_24" />
 

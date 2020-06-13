@@ -114,7 +114,7 @@ public class ChatUserAdapter extends RecyclerView.Adapter<com.rgs.friendlychat.C
                                     Log.d("3114", "Got it.....................................................................: " + dataSnapshot2.getKey());
 
                                     Log.d("3114", "onClick: 2 ........." + chatids.toString());
-                                    Toast.makeText(context, chatids.get(users.indexOf(ld.getUID())), Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(context, chatids.get(users.indexOf(ld.getUID())), Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(context, ChatScreen.class);
                                     intent.putExtra("id" , chatids.get(users.indexOf(ld.getUID())));
                                     intent.putExtra("uid" , sharedPreferences.getString("uid","..."));

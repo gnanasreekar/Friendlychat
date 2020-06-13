@@ -3,6 +3,9 @@
     <item android:title="name"
         android:id="@+id/name" />
 
+    <item android:title="UID"
+        android:id="@+id/uid" />
+
     <item android:title="Feedback"
         android:id="@+id/hello" />
 

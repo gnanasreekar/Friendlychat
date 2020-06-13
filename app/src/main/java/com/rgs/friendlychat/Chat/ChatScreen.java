@@ -6,6 +6,7 @@ package com.rgs.friendlychat.Chat;
   Linkdin : https://www.linkedin.com/in/gnana-sreekar/
   Instagram : https://www.instagram.com/gnana_sreekar/
   Website : https://gnanasreekar.com
+  help by https://github.com/AndreiD
 */
 
 import android.content.SharedPreferences;
@@ -141,10 +142,10 @@ public class ChatScreen extends AppCompatActivity {
         }
 
         //simple anti-flood protection
-//        if ((System.currentTimeMillis() / 1000L - last_message_timestamp) < ANTI_FLOOD_SECONDS) {
-//            SCUtils.showErrorSnackBar(mContext, findViewById(android.R.id.content), "You cannot send messages so fast.").show();
-//            return;
-//        }
+        if ((System.currentTimeMillis() / 1000L - last_message_timestamp) < ANTI_FLOOD_SECONDS) {
+            SCUtils.showErrorSnackBar(mContext, findViewById(android.R.id.content), "You cannot send messages so fast.").show();
+            return;
+        }
 
         //yes, admins can swear ;)
 //        if ((PROFANITY_FILTER_ACTIVE) && (!IS_ADMIN)) {

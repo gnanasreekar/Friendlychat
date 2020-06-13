@@ -63,6 +63,7 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:ems="10"
+
             android:hint="Type to compose"
             android:inputType="text"
             android:imeOptions="actionSend"
